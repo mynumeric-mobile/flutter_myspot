@@ -1,6 +1,8 @@
-[my_spot.webm](https://github.com/mynumeric-mobile/flutter_spot/assets/60822263/677de86d-3368-4e3e-af2d-d4ce50375abc)
-
 Flutter_MySpot is a plug alowing you to easily implement tutorial in your app
+
+<div align="center">
+  <video  controls autoplay src="https://github.com/mynumeric-mobile/flutter_spot/assets/60822263/677de86d-3368-4e3e-af2d-d4ce50375abc" width="400" />
+</div>
 
 ## Features
 
