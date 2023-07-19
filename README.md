@@ -8,11 +8,20 @@ Flutter_MySpot is a plug alowing you to easily implement tutorial in your app
 
 Manage scenario with scene to explain élément on your flutter widget adding key to desired widget
 
+<li>Allow reponsive screen,</li>
+<li>Audio support (using <a href="https://pub.dev/packages/audioplayers">audioplayer</a>),</li>
+<li>Handle play once (using <a href="https://pub.dev/packages/flutter_secure_storage">flutter_secure_storage)</a>,</li>
+
 ## Getting started
 
-To install plug-in use :
+To install plug-in add to your public.yaml :
 
+dependencies:
+  flutter:
+    sdk: flutter
 
+  flutter_myspot:
+    git: https://github.com/mynumeric-mobile/flutter_spot
 
 ## Usage
 
