@@ -9,6 +9,7 @@ Manage scenario with scene to explain élément on your flutter widget adding ke
 <li>Allow reponsive and moving widget as target,</li>
 <li>Audio support (using <a href="https://pub.dev/packages/audioplayers">audioplayer</a>),</li>
 <li>Handle play once (using <a href="https://pub.dev/packages/flutter_secure_storage">flutter_secure_storage)</a>,</li>
+<li>Deformable spot to accept all widget geometrie,</li>
 <li>Simply add help button to call your scénario,</li>
 <li>Support multiple scenarion on one screen,</li>
 </td></tr></table>
