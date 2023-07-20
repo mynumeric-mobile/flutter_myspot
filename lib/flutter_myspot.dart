@@ -182,6 +182,7 @@ class HoleWidgetState extends State<HoleWidget> {
 
   void start() {
     scenario.init(widget.child);
+    _currentSpotScene = SpotScene(spot: Spot(spotHeight: 1, spotWidth: 1, left: -100, top: -100));
     _currentIndex = -1;
 
     //we need to wait audio title to complete
