@@ -15,13 +15,14 @@ Manage scenario with scene to explain élément on your flutter widget adding ke
 ## Getting started
 
 To install plug-in add to your public.yaml :
-
+```dart
 dependencies:
   flutter:
     sdk: flutter
 
   flutter_myspot:
-    git: https://github.com/mynumeric-mobile/flutter_spot
+    git: https://github.com/mynumeric-mobile/flutter_myspot
+```
 
 ## Usage
 
