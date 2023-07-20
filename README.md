@@ -102,10 +102,69 @@ HoleWidget(
 
 Note that you can use state for other purpose. You just need to at a unique ID.
 
-to set value ```dart
+to set value
+```dart
 SpotScenario.setState("myUniqueID", false);
 ```
-to read state ```dart
-SpotScenario.spotIDs["popScene"]
+to read state 
+```dart
+SpotScenario.spotIDs["myUniqueID"]
 ```
 
+<h2>Adding help button</h2>
+
+MySpot provide a widget to easily add help button to your screen:
+
+```dart
+SpotButton.tutorial(
+            context,HoleWidget(...
+```
+<h2>Defining scenario</h2>
+
+To have more readable code you could define your tutorials in external class
+```dart
+class Tutorial {
+  static HoleWidget home(context) => HoleWidget(
+        scenario: SpotScenario(
+          id: "home",
+            ...
+          child:MyScreenWidget()
+          }
+```
+
+and then you can use just like this :
+
+```dart
+Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Tutorial.home(context),
+                      ),
+                    );
+```
+And help button become just :
+
+```dart
+SpotButton.tutorial(context, Tutorial.home(context))
+```
+
+<h2>Defining endMode</h2>
+
+EndMode define behavior after end of scenario. There is 3 modes :
+
+<h3><li>redirectTochild</li></h3>
+This is the default one. When end is reach we leave tutorial and navigate to the child widget.
+<h3><li>loop</li></h3>
+In this mode we play scenario in loop.
+<h3><li>stayInactive</li></h3>
+If you want to keep MySpot to read another scenario for exemple you must use this one.
+
+<h2>Changing scénario</h2>
+
+In some case it could be intresting having svereal scenario for one screen. For exemple a scenario for introducing screen then give the hand to user to do an action and play after that an other scenario or after returning from popup. For that you have to add key for HoleWidget et the use it as follow:
+
+```dart
+widget.spotKey?.currentState?.changeScenario(Tutorial.home2(
+                      context,
+                      HomeWidget()));
+```                   
