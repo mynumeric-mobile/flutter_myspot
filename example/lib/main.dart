@@ -7,6 +7,37 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
+/// first create a function to retur your scenario,
+/// don't forget to reference with a key your widget in child property
+
+HoleWidget myTutorial(context) => HoleWidget(
+      scenario: SpotScenario(
+        // you can set a title
+        titleWidget: SpotScenario.textWidgetBuilder(text: "Wellcome to our tutorial", context: context),
+        // and a scene for each widget to highlight
+        replayButton: SpotButton(position: SpotPosition(0.8, 0.9), icon: Icons.replay),
+        scenes: [
+          SpotScene(
+            description: SpotScenario.textWidgetBuilder(
+                text: "You can change this number", context: context, style: const TextStyle(color: Colors.white, fontSize: 20)),
+            audioAsset: "number.mp3",
+          ),
+          SpotScene(
+            description: SpotScenario.textWidgetBuilder(
+                text: "by subtracting one", context: context, style: const TextStyle(color: Colors.white, fontSize: 20)),
+            audioAsset: "subtracting.mp3",
+          ),
+          SpotScene(
+            description: SpotScenario.textWidgetBuilder(
+                text: "or adding one", context: context, style: const TextStyle(color: Colors.white, fontSize: 20)),
+            audioAsset: "adding.mp3",
+          )
+        ],
+        endMode: EndMode.loop,
+      ),
+      child: MyHomePage(title: 'Flutter Demo Home Page', key: GlobalKey()),
+    );
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -30,39 +61,7 @@ class _MyAppState extends State<MyApp> {
           useMaterial3: true,
         ),
         darkTheme: ThemeData(colorScheme: const ColorScheme.dark()),
-
-        /// first wrap the call to your widget in a holewidget with your scenario,
-        /// don't forget to reference with a key your widget
-        /// here const MyHomePage(title: 'Flutter Demo Home Page'), become :
-        home: HoleWidget(
-          scenario: SpotScenario(
-            //id: "home", //option if you want to display only once
-            // you can set a title
-            titleWidget: SpotScenario.textWidgetBuilder(text: "Wellcome to our tutorial", context: context),
-            // and a scene for each widget to highlight
-            scenes: [
-              SpotScene(
-                description: SpotScenario.textWidgetBuilder(
-                    text: "You can change this number",
-                    context: context,
-                    style: const TextStyle(color: Colors.white, fontSize: 20)),
-                audioAsset: "number.mp3",
-              ),
-              SpotScene(
-                description: SpotScenario.textWidgetBuilder(
-                    text: "by subtracting one", context: context, style: const TextStyle(color: Colors.white, fontSize: 20)),
-                audioAsset: "subtracting.mp3",
-              ),
-              SpotScene(
-                description: SpotScenario.textWidgetBuilder(
-                    text: "or adding one", context: context, style: const TextStyle(color: Colors.white, fontSize: 20)),
-                audioAsset: "adding.mp3",
-              ),
-            ],
-            endMode: EndMode.loop,
-          ),
-          child: MyHomePage(title: 'Flutter Demo Home Page', key: GlobalKey()),
-        ));
+        home: myTutorial(context));
   }
 }
 
@@ -105,37 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           /// optionaly you add a tutorail button to call your scénario later
-          SpotButton.tutorial(
-            context,
-            HoleWidget(
-              scenario: SpotScenario(
-                // you can set a title
-                titleWidget: SpotScenario.textWidgetBuilder(text: "Wellcome to our tutorial", context: context),
-                // and a scene for each widget to highlight
-                scenes: [
-                  SpotScene(
-                    description: SpotScenario.textWidgetBuilder(
-                        text: "You can change this number",
-                        context: context,
-                        style: const TextStyle(color: Colors.white, fontSize: 20)),
-                    audioAsset: "number.mp3",
-                  ),
-                  SpotScene(
-                    description: SpotScenario.textWidgetBuilder(
-                        text: "by subtracting one", context: context, style: const TextStyle(color: Colors.white, fontSize: 20)),
-                    audioAsset: "subtracting.mp3",
-                  ),
-                  SpotScene(
-                    description: SpotScenario.textWidgetBuilder(
-                        text: "or adding one", context: context, style: const TextStyle(color: Colors.white, fontSize: 20)),
-                    audioAsset: "adding.mp3",
-                  ),
-                ],
-                endMode: EndMode.loop,
-              ),
-              child: MyHomePage(title: 'Flutter Demo Home Page', key: GlobalKey()),
-            ),
-          ),
+          SpotButton.tutorial(context, myTutorial(context)),
           Expanded(
             child: Center(
               child: Column(

@@ -90,29 +90,9 @@ class HoleWidgetState extends State<HoleWidget> {
 
                                 if (_currentSpotScene.audioAsset != null) {
                                   await player.play(AssetSource(_currentSpotScene.audioAsset!));
+                                } else {
+                                  goToNext();
                                 }
-
-                                _movementDelayTimer = Timer(_currentSpotScene.delay, () {
-                                  //after delay hide description
-                                  _showDescription = false;
-                                  if (mounted) setState(() {});
-                                  _hidingDelayTimer = Timer(scenario.hidingDelay, () {
-                                    //wait hidingDelay and go to next scene
-                                    _currentIndex++;
-                                    if (_currentIndex > scenario.scenes.length - 1) {
-                                      //we reach the end
-
-                                      if (scenario.endMode == EndMode.loop) {
-                                        _currentIndex = scenario.endMode == EndMode.loop ? 0 : _currentIndex -= 1;
-                                      } else {
-                                        _currentIndex -= 1;
-                                        quit();
-                                      }
-                                    }
-                                    _currentSpotScene = scenario.scenes[_currentIndex];
-                                    if (mounted) setState(() {});
-                                  });
-                                });
                               },
                               child: AnimatedContainer(
                                 height: _currentSpotScene.spot!.spotHeight,
@@ -203,17 +183,40 @@ class HoleWidgetState extends State<HoleWidget> {
   void start() {
     scenario.init(widget.child);
     _currentIndex = -1;
-    if (scenario.audioAsset != null) {
-      //we need to wait audio title to complete
-      _subscription = player.onPlayerComplete.listen((event) {
-        if (_currentIndex == -1) goTo(0); //avoid eratic events
-        _subscription?.cancel();
-      });
 
+    //we need to wait audio title to complete
+    _subscription = player.onPlayerComplete.listen((event) {
+      goToNext();
+    });
+    if (scenario.audioAsset != null) {
       player.play(AssetSource(scenario.audioAsset!));
     } else {
       goTo(0);
     }
+  }
+
+  void goToNext() {
+    _movementDelayTimer = Timer(_currentSpotScene.delay, () {
+      //after delay hide description
+      _showDescription = false;
+      if (mounted) setState(() {});
+      _hidingDelayTimer = Timer(scenario.hidingDelay, () {
+        //wait hidingDelay and go to next scene
+        _currentIndex++;
+        if (_currentIndex > scenario.scenes.length - 1) {
+          //we reach the end
+
+          if (scenario.endMode == EndMode.loop) {
+            _currentIndex = scenario.endMode == EndMode.loop ? 0 : _currentIndex -= 1;
+          } else {
+            _currentIndex -= 1;
+            quit();
+          }
+        }
+        _currentSpotScene = scenario.scenes[_currentIndex];
+        if (mounted) setState(() {});
+      });
+    });
   }
 
   void goTo(int scene) {
@@ -227,6 +230,7 @@ class HoleWidgetState extends State<HoleWidget> {
 
   void quit() {
     player.pause();
+    _subscription?.cancel();
     cleanTimers();
 
     if (scenario.id != null) {
@@ -253,7 +257,6 @@ class HoleWidgetState extends State<HoleWidget> {
   void cleanTimers() {
     _movementDelayTimer?.cancel();
     _hidingDelayTimer?.cancel();
-    _subscription?.cancel();
   }
 
   void isDisable() {
@@ -415,7 +418,7 @@ class SpotScene {
   late Duration delay;
 
   SpotScene({
-    this.delay = const Duration(seconds: 5),
+    this.delay = const Duration(seconds: 0),
     this.movmentDuration = const Duration(seconds: 2),
     this.deformable = false,
     this.audioAsset,

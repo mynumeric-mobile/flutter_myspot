@@ -145,11 +145,9 @@ packages:
   flutter_myspot:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "348ab39b8970d431929f952f0d405b1440a0bb22"
-      url: "https://github.com/mynumeric-mobile/flutter_myspot"
-    source: git
+      path: ".."
+      relative: true
+    source: path
     version: "0.1.0"
   flutter_secure_storage:
     dependency: transitive
