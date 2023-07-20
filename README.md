@@ -1,16 +1,20 @@
 Flutter_MySpot is a plug alowing you to easily implement tutorial in your app
 
-<div align="center">
+<table><tr><td><div align="center">
   <video  controls autoplay src="https://github.com/mynumeric-mobile/flutter_spot/assets/60822263/677de86d-3368-4e3e-af2d-d4ce50375abc" width="400" />
-</div>
-
-## Features
+</div></td><td><h2>Features</h2>
 
 Manage scenario with scene to explain élément on your flutter widget adding key to desired widget
 
 <li>Allow reponsive and moving widget as target,</li>
 <li>Audio support (using <a href="https://pub.dev/packages/audioplayers">audioplayer</a>),</li>
 <li>Handle play once (using <a href="https://pub.dev/packages/flutter_secure_storage">flutter_secure_storage)</a>,</li>
+<li>Deformable spot to accept all widget geometrie,</li>
+<li>Simply add help button to call your scénario,</li>
+<li>Support multiple scenarion on one screen,</li>
+</td></tr></table>
+
+
 
 ## Getting started
 
@@ -110,6 +114,18 @@ to read state
 ```dart
 SpotScenario.spotIDs["myUniqueID"]
 ```
+<h2>Scénario life cycle</h2>
+
+<li>1 Display title</li>
+<li>2 Play audio title and wait to the end if exist</li>
+<li>3 Move to first scene object using <b>movmentDuration*</b></li>
+<li>4 Display first scene description</li>
+<li>5 Play first scene audio if exist and wait to the end</li>
+<li>6 Wait for <b>delay*</b></li>
+<li>7 hide first scene description</li>
+<li>Go to next scene (step 3) or quit</li>
+
+*user define scenario properties.
 
 <h2>Adding help button</h2>
 
