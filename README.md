@@ -8,7 +8,7 @@ Flutter_MySpot is a plug alowing you to easily implement tutorial in your app
 
 Manage scenario with scene to explain élément on your flutter widget adding key to desired widget
 
-<li>Allow reponsive screen,</li>
+<li>Allow reponsive and moving widget as target,</li>
 <li>Audio support (using <a href="https://pub.dev/packages/audioplayers">audioplayer</a>),</li>
 <li>Handle play once (using <a href="https://pub.dev/packages/flutter_secure_storage">flutter_secure_storage)</a>,</li>
 
@@ -70,3 +70,42 @@ class MyHomePage extends StatefulWidget {
   Text(
     key: widget.tutorialKeys[0],
 ```
+
+<h2>Handle play once</h2>
+
+If you want to display tutorial only on first use, you can call createState(["home"]) where "home" is a unique id for your scene. Your state must be set before any scenario is play in main or in splashscreen. When state is created you just have to set key property of your scene to limit to display her content to first run.
+
+For exemple :
+
+```dart
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SpotScenario.createState(["home"]); //option if you want to display only once
+  runApp(const MyApp());
+}
+```
+
+in your scenario declaration add
+
+```dart
+HoleWidget(
+          scenario: SpotScenario(
+            titleWidget: SpotScenario.textWidgetBuilder(text: "Wellcome to our tutorial", context: context),
+            // and a scene for each widget to highlight
+            scenes: [
+              SpotScene(
+                id:"home,
+                description: SpotScenario.textWidgetBuilder(
+                    text: "You can change this number",
+...
+```
+
+Note that you can use state for other purpose. You just need to at a unique ID.
+
+to set value ```dart
+SpotScenario.setState("myUniqueID", false);
+```
+to read state ```dart
+SpotScenario.spotIDs["popScene"]
+```
+
