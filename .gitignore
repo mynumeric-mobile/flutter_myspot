@@ -8,6 +8,8 @@
 .buildlog/
 .history
 .svn/
+.flutter-plugins-dependencies
+.flutter-plugins
 migrate_working_dir/
 
 # IntelliJ related
