@@ -54,100 +54,106 @@ class HoleWidgetState extends State<HoleWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-      currentConstraints = constraints;
-      return disable
-          ? widget.child
-          : Material(
-              child: Stack(
-                //fit: StackFit.expand,
-                children: [
-                  if (!_hideChild) widget.child,
-                  if (!_sleepMode)
-                    ColorFiltered(
-                      colorFilter:
-                          ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.srcOut), // This one will create the magic
-                      child: Stack(
-                        //fit: StackFit.expand,
-                        children: [
-                          if (_currentSpotScene.spot != null)
-                            Container(
-                              decoration: const BoxDecoration(
-                                  color: Colors.black,
-                                  backgroundBlendMode: BlendMode.dstOut), // This one will handle background + difference out
-                            ),
-                          if (_currentSpotScene.spot != null)
-                            //first move spot light
-                            AnimatedPositioned(
-                              top: _currentSpotScene.spot!.top,
-                              left: _currentSpotScene.spot!.left,
-                              duration: _currentSpotScene.movmentDuration,
-                              curve: Curves.fastOutSlowIn,
-                              onEnd: () async {
-                                //then after movementduration show description and start playing
-                                _showDescription = true;
-                                setState(() {});
-
-                                if (_currentSpotScene.audioAsset != null) {
-                                  await player.play(AssetSource(_currentSpotScene.audioAsset!));
-                                } else {
-                                  goToNext();
-                                }
-                              },
-                              child: AnimatedContainer(
-                                height: _currentSpotScene.spot!.spotHeight,
-                                width: _currentSpotScene.spot!.spotWidth,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  boxShadow: scenario.shadow
-                                      ? const [
-                                          BoxShadow(
-                                            color: Colors.white,
-                                            spreadRadius: 15,
-                                            blurRadius: 10,
-                                            offset: Offset(0, 0),
-                                          ),
-                                        ]
-                                      : null,
-                                ),
-                                duration: Duration(microseconds: (_currentSpotScene.movmentDuration.inMicroseconds / 2).round()),
+    return Align(
+      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+        currentConstraints = constraints;
+        return disable
+            ? widget.child
+            : Material(
+                child: Stack(
+                  //fit: StackFit.expand,
+                  children: [
+                    if (!_hideChild) widget.child,
+                    if (!_sleepMode)
+                      ColorFiltered(
+                        colorFilter:
+                            ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.srcOut), // This one will create the magic
+                        child: Stack(
+                          //fit: StackFit.expand,
+                          children: [
+                            if (_currentSpotScene.spot != null)
+                              Container(
+                                decoration: const BoxDecoration(
+                                    color: Colors.black,
+                                    backgroundBlendMode: BlendMode.dstOut), // This one will handle background + difference out
                               ),
-                            ),
-                        ],
+                            if (_currentSpotScene.spot != null)
+                              //first move spot light
+                              AnimatedPositioned(
+                                top: _currentSpotScene.spot!.top,
+                                left: _currentSpotScene.spot!.left,
+                                duration: _currentSpotScene.movmentDuration,
+                                curve: Curves.fastOutSlowIn,
+                                onEnd: () async {
+                                  //then after movementduration show description and start playing
+                                  _showDescription = true;
+                                  setState(() {});
+
+                                  if (_currentSpotScene.audioAsset != null) {
+                                    await player.play(AssetSource(_currentSpotScene.audioAsset!));
+                                  } else {
+                                    goToNext();
+                                  }
+                                },
+                                child: AnimatedContainer(
+                                  height: _currentSpotScene.spot!.spotHeight,
+                                  width: _currentSpotScene.spot!.spotWidth,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    boxShadow: scenario.shadow
+                                        ? const [
+                                            BoxShadow(
+                                              color: Colors.white,
+                                              spreadRadius: 15,
+                                              blurRadius: 10,
+                                              offset: Offset(0, 0),
+                                            ),
+                                          ]
+                                        : null,
+                                  ),
+                                  duration:
+                                      Duration(microseconds: (_currentSpotScene.movmentDuration.inMicroseconds / 2).round()),
+                                ),
+                              ),
+                          ],
+                        ),
                       ),
-                    ),
-                  if (scenario.titleWidget != null && !_sleepMode)
-                    Positioned(
-                      left: calcPosX(scenario.titlePosition),
-                      top: calcPosY(scenario.titlePosition),
-                      child: scenario.titleWidget!,
-                    ),
-                  if (_currentSpotScene.description != null && !_sleepMode)
-                    Positioned(
-                      left: calcPosX(_currentSpotScene.descriptionPosition),
-                      top: calcPosY(_currentSpotScene.descriptionPosition),
-                      child: AnimatedOpacity(
-                        opacity: _showDescription ? 1 : 0,
-                        duration: scenario.hidingDelay,
-                        child: _currentSpotScene.description!,
+                    if (scenario.titleWidget != null && !_sleepMode)
+                      Positioned(
+                          left: calcPosX(scenario.titlePosition),
+                          top: calcPosY(scenario.titlePosition),
+                          child: AnimatedOpacity(
+                            opacity: 1,
+                            duration: const Duration(milliseconds: 500),
+                            child: scenario.titleWidget!,
+                          )),
+                    if (_currentSpotScene.description != null && !_sleepMode)
+                      Positioned(
+                        left: calcPosX(_currentSpotScene.descriptionPosition),
+                        top: calcPosY(_currentSpotScene.descriptionPosition),
+                        child: AnimatedOpacity(
+                          opacity: _showDescription ? 1 : 0,
+                          duration: scenario.hidingDelay,
+                          child: _currentSpotScene.description!,
+                        ),
                       ),
-                    ),
-                  if (scenario.displayQuit && !_sleepMode)
-                    positionedButton(
-                        button: scenario.quitButton,
-                        onPress: () {
-                          quit();
-                        }),
-                  if (scenario.displayReplay && !_sleepMode)
-                    positionedButton(
-                        button: scenario.replayButton,
-                        onPress: () {
-                          goTo(0);
-                        }),
-                ],
-              ),
-            );
-    });
+                    if (scenario.displayQuit && !_sleepMode)
+                      positionedButton(
+                          button: scenario.quitButton,
+                          onPress: () {
+                            quit();
+                          }),
+                    if (scenario.displayReplay && !_sleepMode)
+                      positionedButton(
+                          button: scenario.replayButton,
+                          onPress: () {
+                            goTo(0);
+                          }),
+                  ],
+                ),
+              );
+      }),
+    );
   }
 
   double calcPosX(SpotPosition pos) => pos.left * currentConstraints!.maxWidth;
