@@ -1,4 +1,4 @@
-Flutter_MySpot is a plug alowing you to easily implement tutorial in your app
+Flutter MySpot is a plugin alowing you to easily implement tutorial in your app
 
 <table><tr><td><div align="center">
   <video  controls autoplay src="https://github.com/mynumeric-mobile/flutter_spot/assets/60822263/677de86d-3368-4e3e-af2d-d4ce50375abc" width="400" />
@@ -184,3 +184,7 @@ widget.spotKey?.currentState?.changeScenario(Tutorial.home2(
                       context,
                       HomeWidget()));
 ```                   
+## dependencies
+
+  shared_preferences: ^2.2.0
+  audioplayers: ^4.1.0
