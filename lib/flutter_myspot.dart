@@ -400,10 +400,7 @@ class SpotButton {
         },
         child: const Padding(
           padding: EdgeInsets.all(8.0),
-          child: Icon(
-            Icons.help_outline,
-            size: 40,
-          ),
+          child: Icon(Icons.help_outline, size: 40, color: Colors.white),
         ),
       ),
     );
