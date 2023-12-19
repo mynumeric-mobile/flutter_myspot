@@ -347,10 +347,10 @@ class SpotScenario {
 
   static Map<String, bool> spotIDs = {};
 
-  static createState(List<String> ids) async {
+  static createState(List<String> ids, {bool? forceTo}) async {
     _prefs ??= await SharedPreferences.getInstance();
     for (String k in ids) {
-      spotIDs[k] = _prefs!.getBool(k) != false;
+      spotIDs[k] = forceTo ?? _prefs!.getBool(k) != false;
     }
   }
 
