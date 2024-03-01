@@ -188,3 +188,5 @@ widget.spotKey?.currentState?.changeScenario(Tutorial.home2(
 
   shared_preferences: ^2.2.0
   audioplayers: ^4.1.0
+
+<a href="https://my-numeric.com">Powered by My-Numeric.com</a>
