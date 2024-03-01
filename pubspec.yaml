@@ -1,7 +1,13 @@
 name: flutter_myspot
 description: Animate spotlight following a desired scenario.
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/mynumeric-mobile/flutter_myspot
+
+# This package supports all platforms listed below.
+platforms:
+  android:
+  ios:
+  web:
 
 environment:
   sdk: '>=3.0.6 <4.0.0'

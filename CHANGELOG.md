@@ -1,3 +1,4 @@
 ## 0.1.0
-
-* TODO: Describe initial release.
+* initial release.
+## 0.1.1
+* Adding force property to createState.

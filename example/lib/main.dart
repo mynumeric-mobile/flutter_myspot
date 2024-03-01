@@ -7,7 +7,7 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-/// first create a function to retur your scenario,
+/// first create a function to return your scenario,
 /// don't forget to reference with a key your widget in child property
 
 HoleWidget myTutorial(context) => HoleWidget(
