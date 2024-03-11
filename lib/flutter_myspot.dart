@@ -9,7 +9,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 ///
 /// define behavior when scenario end
-/// you can chose to stop restart or redirect to child
+/// loop : In this mode we play scenario in loop.
+/// redirectTochild :This is the default one. When end is reach we leave tutorial and navigate to the child widget.
+/// stayInactive : If you want to keep MySpot to read another scenario for exemple you must use this one.
 ///
 enum EndMode { loop, redirectTochild, stayInactive }
 
