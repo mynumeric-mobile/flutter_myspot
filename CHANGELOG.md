@@ -4,3 +4,7 @@
 * Adding force property to createState.
 ## 0.1.2
 * Update readme file.
+## 1.0.0
+* minor change
+## 1.0.1
+* correct format issues

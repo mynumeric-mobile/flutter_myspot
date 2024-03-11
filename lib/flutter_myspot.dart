@@ -7,10 +7,17 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+///
+/// define behavior when scenario end
+/// you can chose to stop restart or redirect to child
+///
 enum EndMode { loop, redirectTochild, stayInactive }
 
 SharedPreferences? _prefs;
 
+///
+/// Tutorial object
+///
 class HoleWidget extends StatefulWidget {
   const HoleWidget({super.key, required this.child, required this.scenario});
   final Widget child;
@@ -269,6 +276,9 @@ class HoleWidgetState extends State<HoleWidget> {
   }
 }
 
+///
+/// Spot object
+///
 class Spot {
   double spotWidth;
   double spotHeight;
@@ -278,6 +288,10 @@ class Spot {
   Spot({required this.spotWidth, required this.spotHeight, required this.left, required this.top});
 }
 
+///
+/// Scenario object
+/// Scenario as several scenes
+///
 class SpotScenario {
   String? id;
   Widget? titleWidget;
