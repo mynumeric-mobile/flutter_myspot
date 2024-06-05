@@ -8,3 +8,5 @@
 * minor change
 ## 1.0.1
 * correct format issues
+## 1.0.2
+* audio player upgrade

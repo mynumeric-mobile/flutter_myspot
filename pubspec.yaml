@@ -1,6 +1,6 @@
 name: flutter_myspot
 description: Build easily tutorial in your flutter applications. Animate spotlight following a desired scenario, play audio messages an comments to guide users.
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/mynumeric-mobile/flutter_myspot
 
 # This package supports all platforms listed below.
